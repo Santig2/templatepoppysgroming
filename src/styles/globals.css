@@ -1,0 +1,73 @@
+@config "../../tailwind.config.js";
+@import "tailwindcss";
+
+:root {
+  /* ACTION */
+  --pp-red: #C13030;
+  --pp-red-dark: #A02525;
+  --pp-red-light: #FCEAEA;
+  --pp-red-shadow: #8B1F1F;
+
+  /* TEXT */
+  --pp-dark: #1A1A1A;
+  --pp-body: #3D3D3D;
+  --pp-muted: #6B6B6B;
+
+  /* BACKGROUNDS */
+  --pp-white: #FFFFFF;
+  --pp-cream: #FDF6EE;
+  --pp-cream-dark: #F5EDE0;
+  --pp-dark-bg: #1A1A1A;
+  --pp-footer: #0F0F0F;
+
+  /* BORDERS */
+  --pp-border: #E5E0D8;
+
+  /* STATES */
+  --pp-success: #1D9E75;
+  --pp-gold: #D4A017;
+
+  /* ACCENT */
+  --pp-petal: #E8C4B8;
+  --pp-sage: #8FA888;
+
+  /* CLAYMORPHISM */
+  --clay-card:
+    0 2px 0 rgba(0,0,0,0.06),
+    0 8px 24px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
+  --clay-card-hover:
+    0 16px 40px rgba(193,48,48,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
+  --clay-btn-primary:
+    0 4px 0 #8B1F1F,
+    0 6px 20px rgba(193,48,48,0.4);
+
+  --clay-btn-primary-hover:
+    0 6px 0 #8B1F1F,
+    0 10px 28px rgba(193,48,48,0.5);
+
+  --clay-btn-primary-active:
+    0 1px 0 #8B1F1F,
+    0 2px 8px rgba(193,48,48,0.3);
+
+  --clay-image:
+    0 8px 32px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+}
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}
+@layer utilities {
+  .clay-card { 
+    background: white;
+    border-radius: 24px;
+    box-shadow: var(--clay-card); 
+  }
+  .clay-inset { box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.05), inset -6px -6px 12px rgba(255, 255, 255, 0.8); }
+  .clay-btn { box-shadow: var(--clay-btn-primary); }
+}

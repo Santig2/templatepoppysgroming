@@ -1,0 +1,1316 @@
+CONTEXTO DEL PROYECTO
+Estás convirtiendo el template Pawsitive Pet — Claymorphism (Next.js + Tailwind CSS) en el sitio web oficial de Poppy
+Paws Mobile Dog Grooming.
+Este NO es un rediseño desde cero. Es una conversión fiel y sistemática del template: mismo layout, misma estructura de
+componentes, mismas animaciones — pero con la identidad visual y el contenido exacto de Poppy Paws.
+Regla de oro: Si el template tiene un componente que funciona bien, mantenlo. Solo cambia colores, fuentes, textos,
+imágenes y agrega las secciones nuevas listadas aquí. La consistencia entre páginas es prioritaria sobre la creatividad
+individual por página.
+
+🏢 DATOS DEL NEGOCIO (usar en todo el sitio)
+Empresa: Poppy Paws Mobile Dog Grooming (legal: Poppy Paws LLC)
+Tagline: "A Touch of Bloom in Every Groom."
+Teléfono: (512) 677-0703 → siempre como href="tel:5126770703" en mobile
+Email: [usar contacto oficial cuando esté disponible]
+Instagram: @poppypawsgrooming
+Google Maps: https://booking.moego.pet/ol/landing?name=PoppyPawsLLC
+Booking URL: https://booking.moego.pet/ol/book?name=PoppyPawsLLC
+New Client: https://form.moego.pet/go/form?formId=00ac685ee25344e394e892c1f6d46748
+Dirección: Georgetown, TX — Serving Williamson & Travis County
+Área: Georgetown · Austin · Round Rock · Cedar Park · Pflugerville · Leander · Liberty Hill · Hutto
+Horario: Mon–Fri 8am–5pm · Sat 8am–1pm · Sunday Closed
+Rating: 4.9 ⭐ en Google · 27 reseñas verificadas
+Equipo: William (Lead Groomer, 20+ yrs exp) · Cris (Co-Founder & Groomer)
+
+🎨 SISTEMA DE COLORES — APLICAR GLOBALMENTE
+Reemplaza TODOS los colores del template con este sistema. Usa CSS variables en globals.css o tailwind.config.js.
+css/* globals.css — CSS Variables */
+:root {
+/* ACCIÓN — El único color de CTAs, badges y accents */
+--pp-red: #C13030;
+--pp-red-dark: #A02525; /* hover states */
+--pp-red-light: #FCEAEA; /* backgrounds suaves */
+--pp-red-shadow: #8B1F1F; /* sombra 3D botones */
+
+/* TEXTO */
+--pp-dark: #1A1A1A; /* headings, logo */
+--pp-body: #3D3D3D; /* párrafos */
+--pp-muted: #6B6B6B; /* captions, subtextos */
+
+/* FONDOS */
+--pp-white: #FFFFFF;
+--pp-cream: #FDF6EE; /* secciones alternas */
+--pp-cream-dark: #F5EDE0; /* cards en fondo crema */
+--pp-dark-bg: #1A1A1A; /* secciones de impacto oscuro */
+--pp-footer: #0F0F0F;
+
+/* BORDES */
+--pp-border: #E5E0D8;
+
+/* ESTADOS */
+--pp-success: #1D9E75; /* checkmarks */
+--pp-gold: #D4A017; /* estrellas rating */
+
+/* ACENTO FLORAL */
+--pp-petal: #E8C4B8; /* rosa pétalo decorativo */
+--pp-sage: #8FA888; /* verde sage suave */
+}
+js// tailwind.config.js — extend colors
+colors: {
+'pp-red': '#C13030',
+'pp-red-dark': '#A02525',
+'pp-red-light': '#FCEAEA',
+'pp-dark': '#1A1A1A',
+'pp-body': '#3D3D3D',
+'pp-muted': '#6B6B6B',
+'pp-cream': '#FDF6EE',
+'pp-cream-dark': '#F5EDE0',
+'pp-border': '#E5E0D8',
+'pp-success': '#1D9E75',
+'pp-gold': '#D4A017',
+'pp-footer': '#0F0F0F',
+}
+⛔ COLORES PROHIBIDOS — eliminar del template:
+
+Naranja / ámbar de cualquier tono
+Verde oscuro tipo esmeralda
+Azul de cualquier variante
+Púrpura / lavender
+Negro puro #000000 (usar #1A1A1A o #0F0F0F)
+
+Patrón de alternancia de fondos por sección (mismo en TODAS las páginas):
+Sección 1 (hero): bg-pp-cream (#FDF6EE)
+Sección 2 (trust bar): bg-pp-dark (#1A1A1A)
+Sección 3: bg-white (#FFFFFF)
+Sección 4: bg-pp-cream (#FDF6EE)
+Sección 5: bg-pp-dark (#1A1A1A)
+Sección 6: bg-white (#FFFFFF)
+... continúa alternando blanco/crema, con oscuro para impacto
+
+✍️ TIPOGRAFÍA — INSTALAR Y APLICAR GLOBALMENTE
+js// next/font en layout.tsx
+import { Playfair_Display, DM_Sans } from 'next/font/google'
+
+const playfair = Playfair_Display({
+subsets: ['latin'],
+weight: ['400', '700'],
+style: ['normal', 'italic'],
+variable: '--font-playfair',
+})
+
+const dmSans = DM_Sans({
+subsets: ['latin'],
+weight: ['300', '400', '500', '700'],
+variable: '--font-dm-sans',
+})
+css/* Aplicación global */
+body { font-family: var(--font-dm-sans), sans-serif; }
+h1, h2 { font-family: var(--font-playfair), serif; }
+.font-display { font-family: var(--font-playfair), serif; }
+.font-body { font-family: var(--font-dm-sans), sans-serif; }
+Escala tipográfica (reemplaza la del template):
+h1 hero: clamp(32px, 8vw, 64px) font-playfair font-bold leading-[1.1]
+h2 sección: clamp(26px, 5vw, 48px) font-playfair font-bold leading-[1.2]
+h3 card: text-xl (20px) font-dm-sans font-bold (700)
+body large: text-lg (18px) font-dm-sans font-normal leading-[1.75]
+body: text-base (16px) font-dm-sans font-normal leading-[1.75]
+label/eyebrow:text-xs (12px) UPPERCASE font-dm-sans font-medium tracking-widest text-pp-red
+button: text-sm (15px) font-dm-sans font-bold
+price: text-3xl (30px) font-dm-sans font-bold text-pp-red
+tagline: text-xl font-playfair italic opacity-60
+⛔ Eliminar del template: cualquier fuente genérica (Inter, Roboto, system-ui, Arial).
+
+🏺 ESTILO CLAYMORPHISM — VARIABLES CSS DE SOMBRAS
+Mantener el claymorphism del template pero adaptar a la paleta roja. Añadir estas variables:
+css/* Sombras claymorphism — reemplazar las del template */
+--clay-card:
+0 2px 0 rgba(0,0,0,0.06),
+0 8px 24px rgba(0,0,0,0.08),
+inset 0 1px 0 rgba(255,255,255,0.9);
+
+--clay-card-hover:
+0 16px 40px rgba(193,48,48,0.14),
+inset 0 1px 0 rgba(255,255,255,0.9);
+
+--clay-btn-primary:
+0 4px 0 #8B1F1F,
+0 6px 20px rgba(193,48,48,0.4);
+
+--clay-btn-primary-hover:
+0 6px 0 #8B1F1F,
+0 10px 28px rgba(193,48,48,0.5);
+
+--clay-btn-primary-active:
+0 1px 0 #8B1F1F,
+0 2px 8px rgba(193,48,48,0.3);
+transform: translateY(3px); /* efecto "presionar" */
+
+--clay-image:
+0 8px 32px rgba(0,0,0,0.12),
+inset 0 1px 0 rgba(255,255,255,0.3);
+Border-radius del template → mantener o reemplazar con:
+Cards: rounded-3xl (24px)
+Botones: rounded-full (pill)
+Imágenes: rounded-2xl (20px)
+Badges/chips: rounded-full (pill)
+Inputs: rounded-xl (12px)
+
+🧩 COMPONENTES GLOBALES (modificar en el template base)
+TOP ANNOUNCEMENT BAR
+Reemplazar el top bar del template por:
+Fondo: bg-pp-red (#C13030)
+Padding: py-2 px-4
+Texto: "✨ Now Welcoming New Clients in Austin & Georgetown — Limited Spots · Book Today"
+Font: text-sm font-dm-sans font-medium text-white tracking-wide
+Mobile: texto en marquee/ticker horizontal (overflow hidden, animation scroll)
+Desktop: texto centrado, ícono X a la derecha para cerrar (localStorage para no volver a mostrar)
+NAVBAR
+Modificar el navbar del template:
+Altura: h-16 (64px mobile) / h-18 (72px desktop)
+Fondo: bg-white/90 backdrop-blur-md border-b border-pp-border
+Sticky: position sticky top-0 z-50
+
+LOGO (izquierda):
+→ Reemplazar logo del template con logo oficial Poppy Paws
+→ Archivo: /public/images/logo-poppy-paws.png (o .svg)
+→ height: h-10 (40px) en desktop / h-8 (32px) en mobile
+→ Alt: "Poppy Paws Mobile Grooming"
+
+LINKS (centro, desktop only — ocultos en mobile):
+Services → /services
+About → /about
+Gallery → /gallery
+FAQ → /faq
+Areas → /service-area
+Font: text-sm font-medium text-pp-dark hover:text-pp-red transition-colors
+
+ACCIONES (derecha):
+1. Toggle idioma: "EN | ES" text-xs text-pp-muted cursor-pointer
+2. Teléfono: "(512) 677-0703" text-sm font-medium — hidden en mobile, visible en sm+
+→ href="tel:5126770703"
+3. Botón "Book Now":
+→ pill rojo: bg-pp-red text-white rounded-full px-6 py-2.5 text-sm font-bold
+→ shadow: var(--clay-btn-primary)
+→ hover: bg-pp-red-dark + translateY(-2px)
+→ href="/book"
+
+MOBILE HAMBURGER:
+→ Ícono 3 líneas, área tappable mínimo 48x48px
+→ Al abrir: drawer fullscreen desde la derecha
+→ Overlay oscuro detrás (backdrop, tap cierra)
+→ Logo centrado + X en esquina
+→ Links verticales: text-xl font-bold py-4 border-b border-pp-border
+→ Teléfono: text-xl font-bold text-pp-red centrado
+→ Horario: text-sm text-pp-muted centrado
+→ Toggle idioma centrado
+STICKY BOTTOM BAR (MOBILE ONLY — nuevo componente)
+Añadir este componente — no existe en el template original:
+jsx// components/MobileBookingBar.tsx
+// Visible SOLO en mobile (md:hidden)
+// Posición: fixed bottom-0 left-0 right-0 z-50
+// Safe area: pb-[env(safe-area-inset-bottom)]
+
+<div className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex h-16 
+                pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+
+    {/* Botón Book Now */}
+    <a href="/book" className="flex-1 flex items-center justify-center gap-2
+                              bg-pp-red text-white font-bold text-sm">
+        <CalendarIcon className="w-4 h-4" />
+        Book Now
+    </a>
+
+    {/* Divisor vertical */}
+    <div className="w-px bg-pp-red-dark" />
+
+    {/* Botón Call */}
+    <a href="tel:5126770703" className="flex-1 flex items-center justify-center gap-2
+                                       bg-[#A02525] text-white font-bold text-sm">
+        <PhoneIcon className="w-4 h-4" />
+        (512) 677-0703
+    </a>
+
+</div>
+
+// IMPORTANTE: Agregar pb-20 md:pb-0 a todos los footers para clearance
+FOOTER
+Reemplazar el footer del template completamente:
+Fondo: bg-pp-footer (#0F0F0F)
+Padding: pt-16 pb-8 px-6 md:px-20
+
+LOGO:
+→ Logo versión negativa (blanco sobre oscuro)
+→ /public/images/logo-poppy-paws-white.png
+→ Alt: "Poppy Paws Mobile Grooming"
+
+TAGLINE bajo logo:
+→ "A Touch of Bloom in Every Groom."
+→ font-playfair italic text-base text-white/40
+
+4 COLUMNAS (desktop) / 2 columnas (tablet) / 1 columna (mobile):
+
+Col 1 — Marca:
+Logo + tagline
+"📞 (512) 677-0703" → href="tel:5126770703" text-pp-red font-bold text-lg
+"📸 @poppypawsgrooming" → href Instagram text-pp-red text-sm
+Iconos sociales: Instagram + Google Maps (circulares, 40px, bg-white/10)
+
+Col 2 — Services:
+Título: "Services" text-white font-bold text-sm uppercase tracking-widest
+Links: Full Groom · Bath & Mini Groom · Dental Cleaning · Add-Ons
+Font: text-sm text-white/60 leading-loose hover:text-white
+
+Col 3 — Company:
+Título: "Company"
+Links: About · Gallery · FAQ · Service Area · Blog
+
+Col 4 — Hours & Book:
+Título: "Hours"
+Mon–Fri: 8:00 am – 5:00 pm
+Saturday: 8:00 am – 1:00 pm
+Sunday: Closed
+Font: text-sm text-white/60 leading-loose
+Botón "Book Now →": full-width pill rojo mt-4
+
+BOTTOM BAR:
+border-t border-white/10 pt-6 mt-10
+Flex: copyright izquierda / legal links derecha
+"© 2025 Poppy Paws LLC. All rights reserved."
+"Privacy Policy · Terms of Service"
+Font: text-xs text-white/30
+
+→ Agregar pb-20 md:pb-0 para clearance del mobile sticky bar
+
+📄 PÁGINAS — CONTENIDO COMPLETO
+
+PÁGINA 1: HOME (/)
+SEO meta tags:
+html<title>Poppy Paws Mobile Dog Grooming | Austin & Georgetown TX</title>
+<meta name="description"
+    content="Premium cage-free mobile dog grooming serving Austin, Georgetown, Round Rock & Cedar Park TX. 20+ years experience. Book your doorstep spa appointment today. (512) 677-0703" />
+<meta name="keywords"
+    content="mobile dog grooming Austin TX, mobile pet grooming Georgetown TX, cage-free dog grooming, dog groomer near me Austin" />
+<link rel="canonical" href="https://poppypawsgrooming.com/" />
+<!-- Open Graph -->
+<meta property="og:title" content="Poppy Paws Mobile Dog Grooming | Austin & Georgetown TX" />
+<meta property="og:description"
+    content="Premium cage-free mobile dog grooming. 20+ years experience. We come to you." />
+<meta property="og:image" content="/images/og-poppy-paws.jpg" />
+<!-- Schema.org LocalBusiness -->
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Poppy Paws Mobile Dog Grooming",
+  "telephone": "(512) 677-0703",
+  "address": {"@type": "PostalAddress", "addressLocality": "Georgetown", "addressRegion": "TX"},
+  "areaServed": ["Georgetown TX","Austin TX","Round Rock TX","Cedar Park TX","Pflugerville TX","Leander TX"],
+  "openingHours": ["Mo-Fr 08:00-17:00","Sa 08:00-13:00"],
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "27"}
+}</script>
+── SECCIÓN: HERO ──
+Fondo: bg-pp-cream (#FDF6EE)
+Layout: split 50/50 desktop — izquierda contenido, derecha imagen
+stack mobile — imagen arriba (55vw height), contenido abajo
+
+IZQUIERDA:
+Badge pill:
+bg-pp-red-light text-pp-red rounded-full px-4 py-1.5 text-xs font-bold tracking-wide
+Texto: "🐾 Mobile Dog Grooming · Austin & Georgetown TX"
+mb-6
+
+H1 (Playfair Display Bold):
+"Your Dog Deserves"
+"a Spa Day —" ← el "—" en text-pp-red
+"Without Leaving Home."
+clamp(32px, 8vw, 64px) leading-[1.1] text-pp-dark mt-4
+
+Subheadline (DM Sans Regular 18px, text-pp-muted, leading-[1.75], max-w-md):
+"Premium mobile dog grooming in Austin, Georgetown & surrounding areas.
+One-on-one care, cage-free, at your doorstep. 20+ years of experience."
+mt-6
+
+Trust mini bar (flex items-center gap-4 text-sm font-medium text-pp-dark mt-5):
+"⭐ 4.9 Google · 🐾 20+ Yrs · 🚐 Cage-Free"
+
+Botones (mt-8 flex flex-col sm:flex-row gap-3):
+Primario: "Book My Appointment →"
+bg-pp-red text-white rounded-full px-8 py-4 text-sm font-bold
+shadow: var(--clay-btn-primary)
+hover: bg-pp-red-dark + translateY(-2px)
+href="/book"
+
+Secundario: "Call (512) 677-0703"
+border-2 border-pp-dark text-pp-dark rounded-full px-8 py-4 text-sm font-bold
+shadow: 0 4px 0 rgba(0,0,0,0.15)
+hover: bg-pp-dark text-white
+href="tel:5126770703"
+
+Social proof (flex items-center gap-3 mt-8):
+→ 4 avatares circulares apilados (overlap -ml-3, w-9 h-9, border-2 border-white)
+→ Texto: "Trusted by 200+ dog families in Central Texas"
+text-sm text-pp-muted
+
+DERECHA:
+→ Foto: van de Poppy Paws llegando a casa O William/Cris sosteniendo un perro recién bañado
+→ /public/images/hero-van-or-team.jpg
+→ object-cover w-full h-full rounded-3xl (desktop) / rounded-none (mobile, sangra borde a borde)
+→ Parallax: transform translateY() basado en scroll * 0.4
+→ shadow: var(--clay-image)
+
+Badge flotante (absolute bottom-6 left-6):
+bg-white rounded-2xl px-5 py-4 shadow-lg
+"⭐⭐⭐⭐⭐" text-pp-gold text-lg
+"4.9 · 27 Reviews · Google" text-sm font-bold text-pp-dark
+Animación entrada: slide-up + fade-in delay 1.2s
+
+HERO SCROLL INDICATOR (absolute bottom-6 left-1/2 -translate-x-1/2):
+Flecha SVG animada (bounce 2s infinite)
+text-pp-muted text-xs tracking-widest uppercase mt-2: "Scroll"
+── SECCIÓN: TRUST BAR ──
+Fondo: bg-pp-dark (#1A1A1A)
+Padding: py-5 px-6
+
+Layout flex: 4 items, justify-center, gap-8 desktop / grid-2x2 gap-4 mobile
+Separador: línea vertical 1px rgba(255,255,255,0.1) entre items (desktop)
+
+Items (cada uno: flex items-center gap-2):
+1. Ícono estrella text-pp-gold + "⭐ 4.9 Stars on Google"
+2. Ícono pata text-pp-red + "🐾 20+ Years of Experience"
+3. Ícono furgoneta text-pp-red + "🚐 Cage-Free Mobile Service"
+4. Ícono pin text-pp-red + "📍 Austin & Georgetown, TX"
+
+Font: text-sm font-medium text-white
+── SECCIÓN: WHY POPPY PAWS ──
+Fondo: bg-white
+Padding: py-24 px-6
+
+Eyebrow label: "WHY CHOOSE US" — text-xs font-bold uppercase tracking-widest text-pp-red mb-4
+H2 (Playfair Bold, centrado): "Why Families in Austin Choose Poppy Paws"
+Sub (DM Sans, centrado, text-pp-muted, max-w-xl mx-auto):
+"Because your dog is family — and they deserve the best."
+mb-16
+
+3 CARDS claymorphism (grid grid-cols-1 md:grid-cols-3 gap-8):
+Cada card:
+bg-white rounded-3xl p-10
+shadow: var(--clay-card)
+border-t-4 border-pp-red
+hover: var(--clay-card-hover) + -translate-y-2 transition-all duration-300
+
+Card 1:
+Ícono: círculo bg-pp-red-light p-4 rounded-2xl w-16 h-16 → ícono corazón/pata text-pp-red
+H3: "For Your Dog"
+Body: "No cages. No crowded salons. No waiting. Your pup gets 100% one-on-one attention
+from the same trusted groomer, every single visit."
+
+Card 2:
+Ícono: casa icon, mismo estilo
+H3: "For Your Home"
+Body: "All the mess stays in our van — not your bathtub, towels, or floors.
+We bring everything. You just open the door."
+
+Card 3:
+Ícono: reloj icon
+H3: "For Your Time"
+Body: "No driving. No waiting rooms. No picking up. We come to you and work
+around your schedule — mornings, afternoons, even Saturdays."
+── SECCIÓN: HOW IT WORKS ──
+Fondo: bg-pp-cream
+Padding: py-24 px-6
+
+Eyebrow: "THE PROCESS"
+H2: "Grooming Made Simple"
+Sub: "Here's exactly what happens from booking to happy tail."
+
+4 STEPS (flex row desktop / column mobile, gap-0, línea conectora punteada entre pasos):
+Línea conectora (desktop only): absolute, altura 2px, bg-pp-border, dashed, z-0
+
+Cada step (relative z-10, text-center, flex-1):
+Número: w-14 h-14 bg-pp-red text-white rounded-full font-bold text-xl mx-auto
+shadow: var(--clay-btn-primary)
+Línea bajo número: 2px #E5E0D8, mt-6 mb-4
+Título (DM Sans Bold 18px text-pp-dark): Step title
+Texto (DM Sans 15px text-pp-muted, max-w-[200px] mx-auto): Step description
+
+Step 1: "Book Online or Call" / "Choose your service and date in minutes. New clients always welcome!"
+Step 2: "We Come to You" / "Our Poppy Paws van arrives right on time, fully equipped."
+Step 3: "Full Spa Treatment" / "Private 1-on-1 groom: bath, cut, nails, ears & more."
+Step 4: "Happy Dog, Happy Family" / "We hand back a fresh, fluffy, great-smelling pup. Instantly."
+
+Mini CTA (centrado, mt-12):
+"Ready to get started?" text-base text-pp-muted mb-4
+Botón rojo: "Book Your First Appointment →"
+href="/book"
+── SECCIÓN: OUR SERVICES ──
+Fondo: bg-pp-dark (#1A1A1A)
+Padding: py-24 px-6
+
+Eyebrow: "OUR SERVICES" text-pp-red
+H2: "Choose the Perfect Groom for Your Dog" text-white
+Sub: "Every service includes double wash, blow-dry, nail trim & ear cleaning."
+text-white/60 max-w-lg mx-auto text-center
+
+3 SERVICE CARDS (grid grid-cols-1 md:grid-cols-3 gap-6 mt-16):
+Cada card:
+bg-[#262626] rounded-3xl p-8
+border border-white/10
+hover: border-pp-red -translate-y-2 transition-all duration-300
+cursor-pointer
+
+Card 1 — Full Groom:
+Precio: "From $125" text-3xl font-bold text-pp-red
+Divider: 1px border-white/10 my-4
+Título: "Full Groom" text-xl font-bold text-white
+Body: "The complete spa experience: double wash, blow-dry, full haircut, nail trim,
+ear cleaning & fragrance." text-white/60 text-sm leading-relaxed
+"Best for:" text-xs font-bold text-pp-red mt-4
+Razas: "Regular, Doodle & Double-Coat breeds" text-white/50 text-xs
+Link: "Book Full Groom →" text-pp-red font-bold text-sm mt-6 hover:gap-2
+href="/book"
+
+Card 2 — Bath & Mini Groom:
+Precio: "From $105"
+Título: "Bath & Mini Groom"
+Body: "A fresh refresh without the full cut. Double wash, blow-dry, brush-out,
+nail trim, ear cleaning & light trimming."
+"Best for:" "Short-coat breeds or pups between grooms"
+href="/book"
+
+Card 3 — Dental Cleaning (card especial):
+Badge: "✨ PREMIUM ADD-ON" bg-pp-gold/20 text-pp-gold rounded-full px-3 py-1 text-xs font-bold mb-4
+Precio: "From $200"
+Título: "Anesthesia-Free Dental Cleaning"
+Body: "Gentle cosmetic teeth cleaning while your dog is awake. No sedation needed.
+Surface plaque & tartar removal."
+href="/services#dental"
+
+Link "View All Services & Pricing →" text-white underline text-sm mt-10 text-center block
+href="/services"
+── SECCIÓN: REVIEWS ──
+Fondo: bg-white
+Padding: py-24 px-6
+
+Eyebrow: "CLIENT REVIEWS"
+H2: "What Our Clients Are Saying"
+Rating summary (flex items-baseline gap-3 justify-center mt-4):
+"4.9" text-6xl font-bold text-pp-dark font-dm-sans
+5x ⭐ text-pp-gold text-2xl
+"(27 Google reviews)" text-sm text-pp-muted
+
+SLIDER DE REVIEWS (mt-16, carousel con swipe en mobile):
+4 cards visibles desktop / 1 mobile
+
+Cada review card:
+bg-white rounded-3xl p-8 shadow: var(--clay-card)
+
+Header: flex gap-4 items-center mb-4
+Avatar: w-12 h-12 rounded-full object-cover bg-pp-red-light (inicial si no hay foto)
+Nombre: font-bold text-pp-dark text-base
+Badge: "✓ Google Verified" text-xs bg-pp-red-light text-pp-red rounded-full px-2 py-0.5
+
+Estrellas: text-pp-gold text-base mb-3 "⭐⭐⭐⭐⭐"
+
+Texto (italic text-pp-body text-sm leading-relaxed):
+Ciudad: text-xs text-pp-muted mt-4
+
+Reviews a mostrar (en orden):
+1. Josh D. | Georgetown TX
+"Wow, I so highly recommend Poppy Paws for all your dog grooming. Our dog Louie
+absolutely loves grooming day. They are compassionate, caring and so talented.
+We've been using them for years for multiple dogs."
+
+2. Katherine G. | Georgetown TX
+"William has been grooming our corgi for about 4 years now and does a fantastic job.
+From the bath to trim he hits the mark every time."
+
+3. Rachel G. | Austin TX
+"My little baby looks fantastic! It's the best grooming she's had in forever.
+Plus she didn't have any anxiety after. She's an old girl and needed one-to-one care.
+The groomer was so kind and gentle."
+
+4. Ruben L. | Austin TX
+"My mini Aussie Sniper looks absolutely amazing. Cris has a lot of experience —
+Sniper can be shy, but he was completely at ease the entire time."
+
+Slider controls: dots circulares (active: bg-pp-red 8px / inactive: bg-pp-border 6px)
+CTA link: "Read All 27 Reviews on Google →" text-pp-red font-bold text-sm mt-10 text-center
+── SECCIÓN: MEET THE TEAM ──
+Fondo: bg-pp-cream
+Padding: py-24 px-6
+
+Eyebrow: "THE TEAM"
+H2: "The Hands Behind Every Groom"
+Sub: "When Poppy Paws comes to your door, you'll always know exactly who's caring for your dog."
+
+2 TEAM CARDS (grid grid-cols-1 md:grid-cols-2 gap-10 mt-16):
+Cada card — layout flex: foto izquierda + contenido derecha (desktop) / stack (mobile)
+
+Foto:
+→ /public/images/william-groomer.jpg / /public/images/cris-cofounder.jpg
+→ w-48 h-48 (desktop) / w-full h-64 (mobile)
+→ rounded-3xl object-cover shadow: var(--clay-image)
+→ Frame decorativo: pseudo-element o div con absolute, bg-pp-red-light rounded-3xl
+offset 12px bottom-right z-[-1] ← efecto "sombra de color"
+
+Contenido (flex-1 pl-8 desktop / pt-6 mobile):
+Nombre: Playfair Display Bold 28px text-pp-dark
+Rol: text-xs uppercase tracking-widest text-pp-red font-bold mt-1
+Divider: w-12 h-0.5 bg-pp-red mt-4 mb-4
+Bio: text-base text-pp-body leading-[1.75]
+Quote: Playfair italic text-lg text-pp-muted mt-4
+Con comillas grandes " en text-pp-red text-4xl leading-none
+
+Card William:
+Foto: /public/images/william-groomer.jpg
+Nombre: "William"
+Rol: "Lead Groomer & Co-Founder"
+Bio: "With over 20 years of professional grooming experience, William has seen every coat type,
+every breed, and every personality. His calm, patient approach is why dogs that used to
+dread grooming day now wag their tails when the van pulls up."
+Quote: "I got into grooming because I love animals. After 20 years, I still feel the same way."
+
+Card Cris:
+Foto: /public/images/cris-cofounder.jpg
+Nombre: "Cris"
+Rol: "Co-Founder & Groomer"
+Bio: "Cris brings both heart and skill to every appointment. As co-founder, he's built a service
+around what dog owners actually need: reliability, transparency, and a groomer who
+genuinely loves their job."
+Quote: "The best part of my day is handing back a dog that went in nervous and comes out happy."
+── SECCIÓN: SERVICE AREA ──
+Fondo: bg-white
+Padding: py-24 px-6
+
+Layout: grid grid-cols-1 md:grid-cols-2 gap-12 items-center
+
+IZQUIERDA — Mapa:
+→ Google Maps embed del área de Georgetown/Austin
+→ iframe con src="https://www.google.com/maps/embed?pb=..." centrado en Georgetown TX
+→ Clase: w-full h-80 md:h-[450px] rounded-3xl border-0
+→ shadow: var(--clay-image)
+→ Fallback: imagen estática del mapa con link a Google Maps
+
+DERECHA — Contenido:
+Eyebrow: "SERVICE AREA"
+H2: "We Come to You"
+Sub: "Serving Williamson & Travis County, Texas"
+text-pp-body text-base
+
+Grid de chips de ciudades (grid grid-cols-2 gap-3 mt-8):
+Cada chip: bg-white border border-pp-border rounded-full px-4 py-2 text-sm font-medium text-pp-dark
+shadow-sm hover:border-pp-red hover:text-pp-red transition-colors
+Ciudades: Georgetown · Austin · Round Rock · Cedar Park · Pflugerville · Leander · Liberty Hill · Hutto
+
+Nota: "Not sure if we serve your area?" text-sm text-pp-muted mt-6
+Tel: "(512) 677-0703" text-xl font-bold text-pp-red block mt-1 href="tel:5126770703"
+
+Botón: "Check My Area →" btn primario rojo mt-8
+href="/service-area"
+── SECCIÓN: FINAL CTA ──
+Fondo: bg-pp-dark (#1A1A1A)
+Padding: py-24 px-6
+Decorativo: SVG de pétalos de amapola en esquinas, opacity: 0.08, color #C13030
+
+Eyebrow: "GET STARTED TODAY" text-pp-red
+H2 (Playfair Bold, text-white, text-center):
+"Ready to Treat Your Dog to"
+"the Poppy Paws Experience?"
+Sub: "Limited spots available. New clients welcome in Austin, Georgetown & surrounding areas."
+text-white/60 text-base text-center max-w-lg mx-auto
+
+Botones (flex flex-col sm:flex-row gap-4 justify-center mt-10):
+Primario: "Book My Dog's Appointment →" bg-pp-red href="/book"
+Secundario: "Call (512) 677-0703" border-2 border-white/40 text-white href="tel:5126770703"
+
+Tagline (mt-16 text-center):
+Playfair italic text-xl text-white/30
+"A Touch of Bloom in Every Groom."
+
+PÁGINA 2: SERVICES (/services)
+SEO:
+html<title>Mobile Dog Grooming Services & Prices | Poppy Paws Austin TX</title>
+<meta name="description"
+    content="Full groom, bath & trim, anesthesia-free dental cleaning & add-ons. Transparent pricing for all sizes. Mobile grooming serving Austin & Georgetown TX." />
+HERO INTERNO:
+Fondo: bg-pp-cream
+Altura: min-h-[320px] flex items-center
+Centrado
+
+Breadcrumb: "Home / Services" text-xs text-pp-muted
+H1: "Every Dog. Every Coat. Every Size." Playfair Bold text-center
+Sub: "Transparent pricing, no hidden fees. Premium mobile grooming at your doorstep."
+text-pp-muted text-lg text-center max-w-lg mx-auto
+BLOQUES DE SERVICIO (uno por servicio, fondo alternado):
+Para cada servicio — layout 60/40 (info / precio):
+
+SERVICIO 1 — Full Groom Regular Coat (bg-white)
+IZQUIERDA:
+Eyebrow: "FULL GROOM"
+H2: "Full Groom — Regular Coat"
+Body: "The complete Poppy Paws spa experience. Includes full body haircut,
+double bath, blow-dry, brush-out, nail trim, ear cleaning & finishing fragrance."
+
+"What's included:" (font-bold text-pp-dark text-sm uppercase mt-6)
+Lista con checkmarks ✓ (text-pp-success):
+✓ Double wash bath
+✓ Blow-dry & brush-out
+✓ Full body haircut
+✓ Nail trim
+✓ Ear cleaning
+✓ Anal gland expression (on request)
+✓ Finishing fragrance
+
+"Best for:" (font-bold text-pp-red text-sm mt-4)
+Chips de razas: Short-coat · Smooth-coat · Manageable long-hair breeds
+Note (text-xs text-pp-muted italic): *Excludes curly-coated or double-coated breeds
+
+DERECHA — Card de precios claymorphism:
+bg-white rounded-3xl shadow: var(--clay-card) p-8
+
+Header tabla: bg-pp-red rounded-t-2xl px-6 py-3
+"Size" col izquierda · "Price" col derecha text-white font-bold text-sm
+
+Filas (alternadas bg-white / bg-pp-cream):
+Small | $125
+Medium | $140
+Large | $160
+XL | $180
+XXL | $200
+Font: text-sm text-pp-body / precios: text-sm font-bold text-pp-red
+
+Botón full-width: "Book Full Groom →" bg-pp-red rounded-full mt-6
+href="/book"
+
+SERVICIO 2 — Full Groom Doodle/Double Coat (bg-pp-cream)
+(mismo layout, espejado — precio a la izquierda, info a la derecha)
+Precios: Small $140 · Medium $160 · Large $180 · XL $205 · XXL $230
+Best for: Goldendoodles · Labradoodles · Poodles · Aussies · Huskies · Golden Retrievers
+
+SERVICIO 3 — Bath & Mini Groom (bg-white)
+Precios: Small $105 · Medium $120 · Large $140 · XL $160 · XXL $180
+Incluye: Double wash · Blow-dry · Brush-out · Nail trim · Ear cleaning · Light trim (face, paws, sanitary)
+No incluye: Full haircut
+
+SERVICIO 4 — Dental Cleaning (bg-pp-dark, texto blanco — card especial)
+Badge: "✨ PREMIUM SERVICE" bg-pp-gold/20 text-pp-gold
+H2 text-white: "Anesthesia-Free Dental Cleaning"
+Body text-white/70: "A gentle cosmetic teeth cleaning performed while your dog is awake
+and comfortable. No sedation, no anesthesia, no scary vet setting."
+Incluye: Surface plaque removal · Tartar removal · Fresh breath treatment
+Disclaimer italic text-white/50 text-xs:
+"This service does not replace veterinary dental care and does not include extractions,
+X-rays, or probing below the gum line. For cooperative, calm dogs only."
+Precios: Small $200 · Medium $250 · Large $300 · XL $350
+
+SERVICIO 5 — Add-Ons (bg-pp-cream)
+H2: "Optional Add-Ons"
+3 cards (grid-cols-3):
+Matting Fee: "+$35" — "For moderate to severe matting. Extra time, care & equipment required."
+Anal Gland Expression: "Included" on request — "Available with all Full Groom services."
+Fragrance Upgrade: [si aplica]
+FAQ MINI (final de la página, bg-white):
+H2: "Common Questions About Pricing"
+4 preguntas en acordeón:
+Q: Do prices change based on coat condition?
+A: Yes. Matting, heavily soiled coats, or dogs with specific sensitivities may require
+additional time and care, which is reflected in a matting surcharge (+$35).
+We always let you know before proceeding.
+
+Q: How do I know which size my dog is?
+A: Small = under 25 lbs · Medium = 25–50 lbs · Large = 50–80 lbs · XL/XXL = 80+ lbs.
+If you're unsure, give us a call and we'll help you figure it out.
+
+Q: Are prices the same for all breeds?
+A: Pricing differs for doodles and double-coat breeds due to the additional
+time, technique, and products required. Regular coats and doodle/double coats
+are listed separately in our pricing table.
+
+Q: Do you charge a travel fee?
+A: No travel fees within our standard service area. If you're outside Williamson
+or Travis County, contact us and we'll let you know.
+FINAL CTA → mismo componente de Homepage
+
+PÁGINA 3: BOOKING (/book)
+SEO:
+html<title>Book Mobile Dog Grooming Austin TX | Poppy Paws</title>
+<meta name="description"
+    content="Book your Poppy Paws mobile grooming appointment online. Serving Austin, Georgetown & Central Texas. New & existing clients welcome. (512) 677-0703" />
+HERO COMPACTO:
+Fondo: bg-pp-cream min-h-[240px] flex items-center
+H1: "Let's Get Your Dog Looking Their Best"
+Sub: "New clients welcome · Limited spots available · We come to you"
+text-pp-muted
+SPLIT TIPO CLIENTE:
+2 cards lado a lado (desktop) / apiladas (mobile), gap-6, mt-10 max-w-2xl mx-auto
+
+Card "New Client":
+bg-pp-red rounded-3xl p-8 text-white
+Icono: 🐾 text-4xl
+Título: "First time with us?" font-bold text-xl
+Sub: "Start here — takes 2 minutes" text-white/80 text-sm mt-2
+Botón: "New Client Form →" bg-white text-pp-red rounded-full px-6 py-3 font-bold mt-6
+→ Al hacer click: scroll suave hasta el formulario nativo
+
+Card "Existing Client":
+bg-pp-dark rounded-3xl p-8 text-white
+Icono: 📅
+Título: "Already a Poppy Paws client?"
+Sub: "Book your next appointment" text-white/70
+Botón: "Book Again →" bg-white text-pp-dark rounded-full px-6 py-3 font-bold mt-6
+→ Al hacer click: scroll hasta sección del embed externo
+FORMULARIO NATIVO 3 PASOS:
+jsx// Componente: BookingForm.tsx
+// max-w-2xl mx-auto mt-16 bg-white rounded-3xl p-10 shadow-[var(--clay-card)]
+
+PROGRESS BAR:
+3 dots conectados por línea
+Activo: bg-pp-red w-8 h-8 rounded-full text-white text-sm font-bold
+Completado: bg-pp-success w-8 h-8 rounded-full + checkmark
+Pendiente: bg-pp-border w-8 h-8 rounded-full text-pp-muted
+Labels bajo dots: "1 Your Dog" · "2 Service" · "3 Your Info" text-xs font-medium
+
+STEP 1 — YOUR DOG:
+H3 Playfair: "Tell us about your dog"
+Sub DM Sans text-pp-muted: "This helps us give you the most accurate recommendation."
+
+Campo: Dog's Name *
+label: "Dog's Name" text-sm font-medium text-pp-dark mb-2
+input type="text" autocomplete="off"
+placeholder: "e.g. Buddy, Luna, Bella"
+class: w-full h-14 px-4 rounded-xl border border-pp-border focus:border-pp-red
+focus:ring-2 focus:ring-pp-red/20 text-base outline-none transition
+
+Campo: Breed *
+label: "Breed"
+input con datalist de razas populares:
+[Goldendoodle, Labradoodle, Bernedoodle, Poodle, Corgi, German Shepherd,
+Golden Retriever, Australian Shepherd, Husky, Maltipoo, Shih Tzu,
+Yorkshire Terrier, Chihuahua, French Bulldog, Bulldog, Beagle, Dachshund,
+Border Collie, Boxer, Schnauzer]
+
+Campo: Size * (radio cards visuales — 4 opciones):
+Grid 2x2 (mobile) / 4 columnas (desktop), gap-3
+Cada opción: border rounded-2xl p-4 cursor-pointer text-center
+No seleccionado: border-pp-border bg-white text-pp-dark
+Seleccionado: border-2 border-pp-red bg-pp-red-light text-pp-red
+Opciones:
+🐕 Small "Under 25 lbs"
+🐕 Medium "25–50 lbs"
+🐕 Large "50–80 lbs"
+🐕 XL/XXL "80+ lbs"
+
+Campo: Coat Type * (radio cards — 3 opciones):
+✂️ Regular Coat "Short, smooth or manageable long"
+🌀 Doodle/Curly "Doodles, Poodles, Bichons"
+🌿 Double Coat "Husky, Aussie, Golden, Corgi"
+
+Campo: Special Notes (opcional):
+textarea rows={3} resize-none
+placeholder: "Anxious? Injuries? Allergies? Any sensitivities? Let us know..."
+
+Botón: "Continue to Services →" btn primario rojo w-full mt-8
+Deshabilitado (opacity-50 cursor-not-allowed) hasta que campos * estén llenos
+
+STEP 2 — SELECT SERVICE:
+H3: "Choose your service"
+Sub: "Prices shown are starting rates and update based on your dog's info."
+
+3 SERVICE CARDS seleccionables (stacked, gap-4):
+No seleccionada: border border-pp-border bg-white rounded-2xl p-5
+Seleccionada: border-2 border-pp-red bg-pp-red-light rounded-2xl p-5
+
+Layout flex cada card:
+Izquierda: icono circular bg-pp-cream 48px
+Centro: nombre + descripción 1 línea
+Derecha: precio dinámico font-bold text-pp-red text-xl + checkmark al seleccionar
+
+Precio dinámico:
+function getPricing(size, coatType) — calcula en tiempo real
+Muestra: "Est. for [nombre]: $XXX" text-sm text-pp-muted mt-1
+
+Servicios:
+🛁 Full Groom — "Bath, blowout, full haircut, nails, ears" — From $125 (regular) / $140 (doodle)
+🚿 Bath & Mini Groom — "Bath, blowout, brush, nails, light trim" — From $105
+🦷 Dental Cleaning — "Anesthesia-free cosmetic cleaning" — From $200
+
+ADD-ONS section:
+Título: "Optional add-ons" text-xs uppercase font-bold text-pp-muted mt-6
+Checkbox: "Matting treatment (+$35)"
+visible solo si user no mencionó nada sobre pelaje en step 1
+
+Botón: "Continue →" w-full mt-8
+
+STEP 3 — YOUR INFORMATION:
+H3: "Almost there!"
+Sub: "We'll contact you within 24 hours to confirm your appointment."
+
+Campos (todos height h-14 rounded-xl, font-size text-base):
+Your Name * autocomplete="name" placeholder: "First and last name"
+Phone Number * type="tel" inputmode="tel" placeholder: "(512) 000-0000"
+→ formateo automático US mientras escribe
+Email Address * type="email" autocomplete="email"
+Street Address * autocomplete="street-address"
+Sub-label: "We come to you — needed to confirm service area"
+ZIP Code * inputmode="numeric" maxlength="5" w-32
+→ validación: si fuera del área → mensaje "We may not serve your area yet.
+Please call us at (512) 677-0703 to confirm."
+
+Preferred Date * type="date" min=tomorrow max=+90days
+
+Preferred Time * (radio group visual — 3 opciones horizontales):
+🌅 Morning (8am–11am) · ☀️ Afternoon (11am–3pm) · 🌤️ Late Afternoon (3pm–5pm)
+Nota bajo opciones: text-xs text-pp-muted "We'll confirm exact time when we reach out"
+
+How did you hear about us? (select, opcional):
+Google · Instagram · Nextdoor · Referral from friend · Yelp · Other
+
+Privacy checkbox *:
+"I agree to Poppy Paws' Privacy Policy and Terms of Service"
+Links abren en nueva tab
+
+BOTÓN SUBMIT:
+"Request My Appointment →" w-full h-14 bg-pp-red text-white rounded-full font-bold text-base
+Estado loading: text "Sending..." + spinner SVG animado
+Estado error: border rojo + mensaje de error bajo el botón
+
+CONFIRMATION STATE (reemplaza el form post-submit):
+Ícono: ✅ text-6xl text-pp-success centrado
+H2 Playfair: "You're all set, [nombre]! 🐾"
+Body: "We've received your request for [nombre del perro]. We'll contact you at
+[teléfono] within 24 hours to confirm your appointment."
+
+Info box (bg-pp-cream rounded-2xl p-6 mt-8):
+"If you need to reach us sooner:" text-sm text-pp-muted
+"(512) 677-0703" text-xl font-bold text-pp-red href="tel:5126770703"
+"Follow us for tips & before/afters:" text-sm text-pp-muted mt-3
+"@poppypawsgrooming" text-pp-red font-bold
+
+Botón: "Back to Home →" outlined mt-8 href="/"
+EMBED MOEGO.PET (sección separada debajo del formulario):
+jsx// Sección: "Already a Poppy Paws client? Book directly:"
+// Visible como sección separada, no mezclada con el form nativo
+
+<section id="existing-client" className="py-16 bg-pp-cream">
+    <div className="max-w-3xl mx-auto px-6">
+
+        <h2 className="font-playfair text-2xl font-bold text-pp-dark mb-2">
+            Already a Poppy Paws client? Book directly:
+        </h2>
+        <p className="text-pp-muted text-sm mb-8">
+            Use our booking system to schedule your next appointment.
+        </p>
+
+        {/* ESTADO ACTIVO — cuando el embed esté listo: */}
+        <div className="rounded-3xl overflow-hidden shadow-[var(--clay-card)]">
+            <iframe src="https://booking.moego.pet/ol/book?name=PoppyPawsLLC" width="100%" height="700" frameBorder="0"
+                title="Book with Poppy Paws" loading="lazy" className="w-full" style={{ minHeight: '500px' }} />
+        </div>
+
+        {/* FALLBACK si el iframe no carga — mostrar automáticamente con onerror */}
+        <div id="booking-fallback" className="hidden bg-white rounded-3xl p-10 text-center shadow-[var(--clay-card)]">
+            <p className="text-pp-muted mb-4">Unable to load booking system.</p>
+            <a href="tel:5126770703" className="btn-primary">
+                Call to Book: (512) 677-0703
+            </a>
+        </div>
+
+    </div>
+</section>
+
+{/* Script para mostrar fallback si iframe falla */}
+<script dangerouslySetInnerHTML={{__html: ` const iframe=document.querySelector('iframe[title="Book with Poppy Paws"
+    ]'); iframe.onerror=()=> {
+            document.getElementById('booking-fallback').classList.remove('hidden');
+            iframe.style.display = 'none';
+        };
+`}} />
+
+PÁGINA 4: ABOUT (/about)
+SEO:
+html<title>About Poppy Paws | Mobile Dog Groomers Georgetown & Austin TX</title>
+<meta name="description" content="Meet William & Cris — the team behind Poppy Paws Mobile Grooming. 20+ years experience. Cage-free, one-on-one grooming in Georgetown, Austin & Central Texas." />
+HERO:
+Fondo:   bg-pp-cream  ← NO verde oscuro. Siempre crema.
+Layout:  split 50/50 desktop / stack mobile
+
+IZQUIERDA:
+  Eyebrow: "OUR STORY"
+  H1 Playfair: "We're Not Just Groomers. We're Dog People."
+  Sub: "Poppy Paws was built by people who believe your dog deserves the same care 
+        and attention you'd want for yourself."
+  Botón: "Meet the Team ↓"  scroll suave a sección team
+         outlined rojo, mt-8
+
+DERECHA:
+  → Foto del equipo junto (William + Cris con perros) sobre fondo neutro/crema
+  → /public/images/team-together.jpg
+  → Fondo de la imagen: NUNCA verde oscuro. Usar fondo claro o al aire libre.
+  → rounded-3xl shadow: var(--clay-image)
+OUR STORY:
+Fondo: bg-white
+Max-w: max-w-3xl mx-auto text-center padding py-24 px-6
+
+Comillas decorativas: " texto-9xl font-playfair text-pp-red/20 leading-none -mb-8
+Body (DM Sans 18px, leading-[1.9], text-pp-body):
+  "Poppy Paws Mobile Grooming was born out of a simple idea: dog grooming should be 
+  stress-free — for the dog, and for the family."
+  
+  "Rooted in Georgetown, TX, our team has spent over two decades learning that every dog 
+  is different. Some are anxious. Some are elderly. Some have never been groomed before. 
+  That's why we don't rush, we don't cage, and we never treat your dog like just another 
+  appointment."
+  
+  "We bring the spa to your doorstep — fully equipped, fully dedicated, one dog at a time."
+
+Pull quote (border-l-4 border-pp-red pl-6 my-12 text-left max-w-lg mx-auto):
+  Playfair italic text-xl text-pp-muted
+  "A Touch of Bloom in Every Groom."
+MEET THE TEAM: → mismo componente que Homepage sección 7
+OUR VALUES:
+Fondo: bg-pp-cream
+H2: "Our Core Values"
+
+Grid 2x2 cards claymorphism (grid grid-cols-1 md:grid-cols-2 gap-6):
+  Card 1 — Safety First:
+    Ícono: escudo/corazón text-pp-red 32px en círculo bg-pp-red-light
+    Título: "Safety First"
+    Body: "Every grooming decision prioritizes your dog's physical and emotional wellbeing. 
+           If something doesn't feel right for your pet, we'll tell you honestly."
+
+  Card 2 — Always Consistent:
+    Ícono: usuario/persona
+    Título: "Always Consistent"
+    Body: "You'll see the same face every visit. We believe trust is built over time — 
+           and your dog deserves to know who's caring for them."
+
+  Card 3 — Radical Transparency:
+    Ícono: ojo/check
+    Título: "Radical Transparency"
+    Body: "No hidden fees. No surprises. If your dog's coat needs extra care, 
+           we always consult you before proceeding."
+
+  Card 4 — True Reliability:
+    Ícono: reloj
+    Título: "True Reliability"
+    Body: "We show up on time, every time. We know your schedule matters — 
+           and late arrivals aren't part of our vocabulary."
+THE VAN:
+Fondo: imagen del van Poppy Paws full-bleed (w-full h-[400px] object-cover)
+Overlay: bg-pp-dark/70
+Texto centrado encima (absolute inset-0 flex flex-col items-center justify-center text-white):
+  H2 Playfair: "Fully Equipped. Arrives at Your Door."
+  Specs (flex gap-6 mt-6 text-sm font-medium text-white/80):
+    "✓ Self-contained unit" · "✓ Professional grade tools" · "✓ All products on board"
+
+PÁGINA 5: GALLERY (/gallery) ← NUEVA SECCIÓN AÑADIDA
+SEO:
+html<title>Dog Grooming Gallery — Before & After | Poppy Paws Austin TX</title>
+<meta name="description" content="See the Poppy Paws difference. Before & after grooming photos of real dogs in Austin, Georgetown & Central Texas. Goldendoodles, Corgis, Aussies and more." />
+HERO:
+Fondo: bg-pp-cream
+H1 Playfair: "Our Happy Clients"
+Sub: "Every transformation, real dogs, real results. Serving Austin, Georgetown & Central Texas."
+Eyebrow: "THE GALLERY"
+FILTROS (tabs/pills):
+Flex wrap gap-3 justify-center mt-10
+Pills activo: bg-pp-red text-white rounded-full px-5 py-2 text-sm font-bold
+Inactivo: bg-white border border-pp-border text-pp-dark rounded-full px-5 py-2 text-sm
+hover: border-pp-red text-pp-red
+
+Filtros:
+  All · Before & After · Full Groom · Bath & Trim · Doodles · Small Dogs · Large Dogs
+GRID MASONRY:
+Layout: columns-2 md:columns-3 gap-4 mt-12
+
+Cada foto card:
+  break-inside-avoid mb-4
+  relative rounded-3xl overflow-hidden shadow: var(--clay-image)
+  
+  Imagen: object-cover w-full
+  Overlay al hover: bg-pp-dark/60 flex items-end p-4 transition-opacity
+    Nombre del perro: font-playfair italic text-white text-lg
+    Servicio + raza: text-sm text-white/80
+
+Fuentes de imágenes:
+  → /public/images/gallery/ directorio
+  → Fotos reales de perros atendidos por Poppy Paws
+  → Nomenclatura: before-after-[nombre]-[servicio].jpg
+  → Si usa Instagram feed: integrar API básica de Instagram para sincronizar
+    (o simplemente importar manualmente las mejores fotos del @poppypawsgrooming)
+
+BEFORE/AFTER SECTION especial (debajo del grid):
+  Fondo: bg-white  py-16
+  H2: "The Poppy Paws Difference"
+  
+  3 comparadores (slider before/after, componente ReactCompareImage o similar):
+    Foto izquierda: "Before" label badge
+    Foto derecha: "After" label badge
+    Slider central: drag handle rojo #C13030
+CTA AL FINAL:
+H2 Playfair: "Ready for a Glow Up?"
+Sub: "Book your dog's transformation today."
+Botón: "Book an Appointment →"  bg-pp-red  href="/book"
+
+Instagram CTA:
+  "See more transformations:"  text-sm text-pp-muted
+  "@poppypawsgrooming"  text-pp-red font-bold  href="https://instagram.com/poppypawsgrooming"
+
+PÁGINA 6: FAQ (/faq)
+SEO:
+html<title>FAQ — Mobile Dog Grooming Questions | Poppy Paws Austin TX</title>
+<meta name="description" content="Answers to the most common questions about Poppy Paws mobile dog grooming: pricing, service areas, booking, what's included. Austin & Georgetown TX." />
+<!-- Schema FAQ -->
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How does mobile dog grooming work?", 
+     "acceptedAnswer": {"@type": "Answer", "text": "We bring a fully-equipped grooming van..."}},
+    ...
+  ]
+}</script>
+HERO:
+H1 Playfair: "Frequently Asked Questions"
+Sub: "Everything you need to know about Poppy Paws mobile grooming."
+Buscador: input con ícono lupa para filtrar preguntas en tiempo real
+placeholder: "Search questions..."
+h-14 rounded-xl border-pp-border max-w-md mx-auto mt-8
+ACORDEÓN CATEGORIZADO:
+Tabs: All · Booking · Pricing · Services · Areas
+Tab activo: border-b-2 border-pp-red text-pp-red font-bold
+Inactivo: text-pp-muted hover:text-pp-dark
+
+PREGUNTAS (cada una en acordeón):
+Container: border border-pp-border rounded-2xl mb-3
+Header: flex justify-between items-center px-6 py-5 cursor-pointer
+Pregunta: text-base font-bold text-pp-dark
+Ícono +: text-pp-red text-xl rotate-0 → rotate-45 cuando abierto (transition 300ms)
+Respuesta: px-6 pb-6 text-pp-body text-sm leading-relaxed
+
+PREGUNTAS COMPLETAS:
+
+Booking:
+Q: How do I book an appointment?
+A: You can book online at poppypawsgrooming.com/book, call us at (512) 677-0703,
+or send us a message on Instagram @poppypawsgrooming. New clients always welcome!
+
+Q: Do I need to be home during the appointment?
+A: Someone should be available at the start and end of the appointment,
+but you don't need to stay outside the whole time. We'll let you know when we're done.
+
+Q: How far in advance should I book?
+A: We recommend booking 1–2 weeks in advance, especially for first appointments
+and weekend slots. For urgent grooming needs, call us — we'll do our best to
+accommodate you.
+
+Q: What is your cancellation policy?
+A: We ask for at least 24 hours notice for cancellations or rescheduling.
+We understand things come up — just give us a call.
+
+Pricing:
+Q: How much does mobile grooming cost?
+A: Prices start at $105 for a Bath & Mini Groom and from $125 for a Full Groom.
+Final price depends on your dog's size and coat type. We always provide a
+clear quote before starting — no hidden fees, ever.
+
+Q: Why does grooming cost more for doodles and double-coat breeds?
+A: Doodles and double-coat breeds (Huskies, Aussies, Goldens) require specialized
+techniques, more time, and specific products to groom properly and safely.
+The additional cost reflects the extra care your dog's coat deserves.
+
+Q: Is there a travel fee?
+A: No travel fees within our standard service area (Williamson & Travis County).
+Contact us if you're outside the area to discuss options.
+
+Services:
+Q: How does mobile dog grooming work?
+A: We bring a fully-equipped Poppy Paws grooming van directly to your home or
+preferred location. Your dog gets a private, one-on-one appointment — no cages,
+no other dogs, no waiting. We handle everything; you just open the door.
+
+Q: How long does a grooming appointment take?
+A: Most appointments run 1.5–3 hours depending on your dog's size, coat type,
+and the service. We never rush — your dog gets all the time they need.
+
+Q: My dog gets really anxious. Is mobile grooming better?
+A: Yes — for most anxious dogs, mobile grooming is significantly less stressful.
+No other dogs, no kennel smells, no loud salon. Your dog gets our full, calm
+attention in a familiar setting.
+
+Q: What products do you use?
+A: We use premium, pet-safe products. If your dog has known allergies or skin
+sensitivities, please let us know when booking and we'll accommodate accordingly.
+
+Q: Do you groom cats or other pets?
+A: Currently, we specialize exclusively in dog grooming to ensure the highest
+quality experience for every canine client.
+
+Q: What is the anesthesia-free dental cleaning?
+A: It's a gentle cosmetic teeth cleaning performed while your dog is awake.
+We remove surface plaque and tartar without any sedation. This service does
+not replace veterinary dental care, but is a great way to maintain your dog's
+oral health between vet visits.
+
+Areas:
+Q: What areas do you serve?
+A: We serve Georgetown, Austin, Round Rock, Cedar Park, Pflugerville, Leander,
+Liberty Hill, Hutto, and surrounding Williamson & Travis County communities.
+Not sure if we cover you? Call us at (512) 677-0703.
+
+Q: Do you come to apartments or condos?
+A: Absolutely! Our van is fully self-contained and doesn't require water or
+electricity from your home. We can service any residential location with
+adequate parking for our van.
+CTA SECTION al final:
+Fondo: bg-pp-red rounded-3xl mx-6 mb-16 p-12 text-center text-white
+H2 Playfair: "Still have questions?"
+Sub: "We're happy to help. Give us a call or send us a message."
+2 botones: "Call (512) 677-0703" bg-white text-pp-red + "Send a Message" outlined blanco
+
+PÁGINA 7: SERVICE AREA (/service-area)
+SEO:
+html<title>Mobile Dog Grooming Service Area | Williamson & Travis County TX</title>
+<meta name="description"
+    content="Poppy Paws serves Georgetown, Austin, Round Rock, Cedar Park, Pflugerville, Leander, Liberty Hill & Hutto TX. Check if we come to your area." />
+HERO:
+H1: "We Come to You"
+Sub: "Serving dog families across Williamson & Travis County, Texas."
+MAPA + CIUDADES:
+Layout: grid 60/40 — mapa izquierda / ciudades derecha
+
+Mapa:
+→ Google Maps iframe embed centrado en Georgetown/Austin area
+→ w-full h-[500px] rounded-3xl border-0
+→ Pins en cada ciudad servida
+→ src con API key o embed estático
+
+Ciudades — cards individuales por ciudad (derecha):
+H3: "Cities We Serve"
+
+Grid 2 columnas de chips con descripción corta:
+
+Georgetown TX ← HOME BASE (badge "Home Base" en pp-red)
+Austin TX
+Round Rock TX
+Cedar Park TX
+Pflugerville TX
+Leander TX
+Liberty Hill TX
+Hutto TX
+
+Cada chip (card pequeña):
+📍 [Ciudad] font-bold text-pp-dark
+"Williamson County" / "Travis County" text-xs text-pp-muted
+
+"Can't find your city?" text-sm text-pp-muted mt-8
+"(512) 677-0703" text-xl font-bold text-pp-red block mt-1 href="tel:5126770703"
+LANDING PAGES SEO:
+Para cada ciudad, crear una landing page individual:
+/mobile-dog-grooming-georgetown-tx
+/mobile-dog-grooming-austin-tx
+/mobile-dog-grooming-round-rock-tx
+/mobile-dog-grooming-cedar-park-tx
+/mobile-dog-grooming-pflugerville-tx
+/mobile-dog-grooming-leander-tx
+
+Cada landing page sigue la misma estructura:
+Hero: "Mobile Dog Grooming in [City], TX"
+Trust signals localizados
+CTA booking
+FAQ mini (2–3 preguntas localizadas)
+Mismo footer y nav global
+
+Estas páginas son CRÍTICAS para SEO local.
+
+🔧 COMPONENTES TÉCNICOS ADICIONALES
+SMOOTH SCROLL & ANIMATIONS
+js// En tailwind.config.js
+animation: {
+'fade-up': 'fadeUp 0.6s ease-out forwards',
+'bounce-slow': 'bounce 2s infinite',
+}
+keyframes: {
+fadeUp: {
+'0%': { opacity: '0', transform: 'translateY(30px)' },
+'100%': { opacity: '1', transform: 'translateY(0)' },
+}
+}
+
+// Agregar a cada sección principal:
+// className="opacity-0 [&.visible]:animate-fade-up"
+// + IntersectionObserver en useEffect para agregar clase 'visible'
+TOGGLE DE IDIOMA
+jsx// components/LanguageToggle.tsx
+// Usa next-intl o i18next para bilingual EN/ES
+// Rutas: / (EN) y /es/ (ES)
+// Toggle visual: "EN | ES" en el nav
+// Fade de contenido al cambiar (200ms)
+// Persiste en localStorage
+ANALYTICS & TRACKING
+jsx// pages/_app.tsx o app/layout.tsx
+// 1. Google Analytics 4 — GA4 con eventos de conversión en:
+// - Click en "Book Now" cualquier botón
+// - Submit del formulario de booking
+// - Click en tel: links
+// - Scroll depth 50% y 90%
+
+// 2. Google Tag Manager (opcional, recomendado)
+// 3. Facebook Pixel (para ads futuros)
+// 4. Microsoft Clarity (heatmaps gratuitos — muy recomendado para UX)
+
+⚠️ CHECKLIST FINAL DE CONSISTENCIA
+Antes de dar por finalizada cualquier página, verificar:
+COLORES:
+□ Ningún naranja, ámbar, verde oscuro, azul o púrpura visible en ninguna página
+□ Todos los CTAs primarios: bg-pp-red (#C13030) con sombra 3D
+□ Secciones alternas: white / cream / dark (en ese patrón)
+□ Eyebrow labels: SIEMPRE text-pp-red uppercase tracking-widest text-xs
+
+TIPOGRAFÍA:
+□ H1 y H2: font-playfair SIEMPRE, sin excepciones
+□ Todo lo demás: font-dm-sans
+□ Body text mínimo 16px en todos los viewports
+□ No hay ninguna fuente del template original que no sea Playfair o DM Sans
+
+MOBILE:
+□ Sticky bottom bar visible en todas las páginas (excepto /book)
+□ Todos los botones en mobile: w-full, min-height 52px
+□ Teléfono: siempre href="tel:5126770703"
+□ Inputs: font-size 16px mínimo
+□ Footer tiene pb-20 para clearance del sticky bar
+
+CLAYMORPHISM:
+□ Todas las cards tienen shadow: var(--clay-card)
+□ Hover en cards: --clay-card-hover + -translate-y-2
+□ Botones primarios: shadow: var(--clay-btn-primary) con sombra inferior más oscura
+□ border-radius mínimo 20px en cards
+
+LOGO:
+□ Logo oficial Poppy Paws en header (no placeholder)
+□ Logo blanco en footer
+□ Alt text: "Poppy Paws Mobile Grooming"
+□ Favicon: /public/favicon.ico con ícono de huella
+
+SEO:
+□ Cada página tiene title único < 60 caracteres □ Meta description única < 160 caracteres con keyword + ciudad □ H1
+    único por página con keyword objetivo □ Schema.org LocalBusiness en homepage □ Schema.org FAQPage en /faq □
+    Sitemap.xml generado automáticamente (next-sitemap) □ robots.txt configurado □ Open Graph image para cada página
+    BOOKING: □ El formulario nativo 3-pasos está funcionando en /book □ El embed de moego.pet está en sección separada
+    con fallback □ El mobile sticky bar lleva a /book (Book Now) y tel:5126770703 (Call) □ Confirmación post-submit
+    muestra nombre del perro y teléfono de contacto 💡 SUGERENCIAS ADICIONALES QUE NO DEBERÍA FALTAR 1. BLOG (/blog) —
+    Motor SEO a largo plazo Crear estructura de blog con categorías: /blog/grooming-tips · /blog/breed-guides ·
+    /blog/austin-pet-life 12 posts de lanzamiento ya escritos (ver documento de copywriting) Esquema ArticleSchema para
+    cada post 2. PÁGINA THANK YOU (/thank-you) Post-booking y post-contact. Para tracking de conversión en GA4. Mensaje
+    de confirmación + upsell suave de add-ons Sin nav distracciones (página mínima) 3. NOTIFICACIONES DE FORMULARIO Al
+    hacer submit del form de booking: - Email automático al cliente (confirm de solicitud recibida) - Notificación a
+    William/Cris (email o SMS via Twilio/SendGrid) - Conectar con Make.com o Zapier para automatizar 4. WHATSAPP BUTTON
+    (opcional pero muy efectivo en audiencia latina) Botón flotante circular rojo con ícono WhatsApp Bottom-right,
+    visible en desktop y mobile Texto prefilled: "Hi! I'd like to book a grooming appointment for my dog." Solo mostrar
+    si el usuario está en US/TX — ocultar en otros países 5. COOKIE BANNER (legal en TX para GA y Facebook Pixel) Banner
+    discreto bottom, fondo pp-dark, texto blanco "We use cookies to improve your experience." Accept / Decline Simple,
+    no modal intrusivo 6. INSTAGRAM FEED en Gallery o Homepage Integrar feed de @poppypawsgrooming vía API de Instagram
+    Basic Display Mostrar últimas 6–9 fotos en grid 3 columnas Botón "Follow @poppypawsgrooming →" 7. CHAT / CONTACT
+    FORM WIDGET Alternativa ligera a WhatsApp: Tawk.to (gratuito) o Tidio O simplemente: formulario de contacto en
+    /contact que envía email directo 8. POPUPS DE CAPTURA (con moderación) Exit-intent popup (solo
+    desktop): "Before you go — new clients get priority booking!" Campo email simple → conecta a Mailchimp/ConvertKit
+    para newsletter Solo mostrar 1 vez por sesión (localStorage flag)
