@@ -16,6 +16,7 @@ import { AnnouncementBar } from '@/components/AnnouncementBar';
 import { Navbar } from '@/components/Navbar';
 import { MobileBookingBar } from '@/components/MobileBookingBar';
 import { Footer } from '@/components/Footer';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 export const metadata = {
   title: 'Poppy Paws Mobile Dog Grooming | Austin & Georgetown TX',
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         <main className="flex-grow">
           {children}
         </main>
+        <WhatsAppButton />
         <MobileBookingBar />
         <Footer />
       </body>
