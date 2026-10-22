@@ -223,46 +223,46 @@ export default function Home() {
           </FadeIn>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
-            {/* Team William */}
+            {/* Team Julian */}
             <FadeIn delay={100} className="flex flex-col lg:flex-row gap-8 items-start group">
               <div className="relative w-full lg:w-48 xl:w-56 shrink-0 z-10 transition-transform duration-500 group-hover:scale-[1.02]">
                 <div className="absolute inset-0 bg-pp-gold-light rounded-[32px] translate-x-3 translate-y-3 z-[-1] opacity-50"></div>
                 <img
-                  src="/william%20ceo.png"
-                  alt="William - Founder & Master Groomer"
+                  src="/julian-founder.jpg"
+                  alt="Julian - Founder & Master Groomer"
                   className="rounded-[32px] w-full aspect-[4/5] object-cover shadow-[var(--clay-image)] border border-white/50"
                 />
               </div>
               <div className="flex-1 mt-4 lg:mt-0 xl:pl-4">
-                <h3 className="text-3xl font-playfair font-bold text-pp-dark mb-1">William</h3>
+                <h3 className="text-3xl font-playfair font-bold text-pp-dark mb-1">Julian</h3>
                 <p className="text-xs uppercase tracking-widest text-pp-gold font-bold font-dm-sans">Founder & Master Groomer</p>
                 <div className="w-12 h-[2px] bg-pp-gold my-5"></div>
                 <p className="text-base text-pp-body leading-[1.8] font-dm-sans opacity-80">
-                  With over 20 years of professional grooming experience, William has seen every coat type and personality. His calm, patient approach is why dogs that used to dread grooming now wag their tails when he pulls up.
+                  With over 18 years of professional grooming experience, Julian has seen every coat type and personality. His calm, patient approach is why dogs that used to dread grooming now wag their tails when he pulls up.
                 </p>
                 <p className="font-playfair italic text-lg text-pp-muted mt-6 relative pl-6 border-l-2 border-pp-gold/30">
                   <span className="absolute -left-2 -top-1 font-playfair text-4xl text-pp-gold/20 leading-none">"</span>
-                  I got into grooming because I love animals. After 20 years, I still feel the exact same way.
+                  I got into grooming because I love animals. After almost two decades, I still feel the exact same way.
                 </p>
               </div>
             </FadeIn>
 
-            {/* Team Valentina */}
+            {/* Team Elena */}
             <FadeIn delay={300} className="flex flex-col lg:flex-row gap-8 items-start group">
               <div className="relative w-full lg:w-48 xl:w-56 shrink-0 z-10 transition-transform duration-500 group-hover:scale-[1.02]">
                 <div className="absolute inset-0 bg-pp-red-light rounded-[32px] translate-x-3 translate-y-3 z-[-1] opacity-50"></div>
                 <img
-                  src="/valentina%20ceo.png"
-                  alt="Valentina - Co-Founder"
+                  src="/elena-founder.jpg"
+                  alt="Elena - Co-Founder"
                   className="rounded-[32px] w-full aspect-[4/5] object-cover shadow-[var(--clay-image)] border border-white/50"
                 />
               </div>
               <div className="flex-1 mt-4 lg:mt-0 xl:pl-4">
-                <h3 className="text-3xl font-playfair font-bold text-pp-dark mb-1">Valentina</h3>
+                <h3 className="text-3xl font-playfair font-bold text-pp-dark mb-1">Elena</h3>
                 <p className="text-xs uppercase tracking-widest text-pp-red font-bold font-dm-sans">Co-Founder & Manager</p>
                 <div className="w-12 h-[2px] bg-pp-red my-5"></div>
                 <p className="text-base text-pp-body leading-[1.8] font-dm-sans opacity-80">
-                  Valentina brings heart and precision to every part of Poppy Paws. As co-founder, she's built a service around what dog owners actually need: reliability, transparency, and genuine love.
+                  Elena brings heart and precision to every part of Poppy Paws. As co-founder, she's built a service around what dog owners actually need: reliability, transparency, and genuine love.
                 </p>
                 <p className="font-playfair italic text-lg text-pp-muted mt-6 relative pl-6 border-l-2 border-pp-red/30">
                   <span className="absolute -left-2 -top-1 font-playfair text-4xl text-pp-red/20 leading-none">"</span>
@@ -270,6 +270,13 @@ export default function Home() {
                 </p>
               </div>
             </FadeIn>
+          </div>
+
+          {/* Dimmed subtle note */}
+          <div className="mt-16 text-center">
+            <p className="text-[11px] text-pp-muted/40 font-dm-sans tracking-wide">
+              * Nota: Perfiles y fotografías de demostración creados con fines conceptuales para este proyecto de portafolio web.
+            </p>
           </div>
         </div>
       </section>

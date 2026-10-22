@@ -11,7 +11,7 @@ const reviewsData = [
   { 
     name: 'Katherine G.', 
     location: 'Georgetown TX', 
-    text: "William has been grooming our corgi for about 4 years now and does a fantastic job. From the bath to trim he hits the mark every time." 
+    text: "Julian has been grooming our corgi for about 4 years now and does a fantastic job. From the bath to trim he hits the mark every time." 
   },
   { 
     name: 'Rachel G.', 
@@ -21,7 +21,7 @@ const reviewsData = [
   { 
     name: 'Ruben L.', 
     location: 'Austin TX', 
-    text: "My mini Aussie Sniper looks absolutely amazing. Cris has a lot of experience — Sniper can be shy, but he was completely at ease the entire time." 
+    text: "My mini Aussie Sniper looks absolutely amazing. Elena has a lot of experience — Sniper can be shy, but he was completely at ease the entire time." 
   }
 ];
 

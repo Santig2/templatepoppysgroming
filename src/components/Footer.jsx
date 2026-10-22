@@ -67,10 +67,17 @@ export function Footer() {
           </div>
         </div>
 
+        {/* DISCLAIMER / DESCARGO DE RESPONSABILIDAD (TEXTO DIFUMINADO / MUTED) */}
+        <div className="border-t border-white/10 pt-6 mt-8">
+          <p className="text-[11px] text-white/25 hover:text-white/50 transition-colors duration-300 leading-relaxed font-dm-sans text-center md:text-left select-none">
+            <span className="font-semibold text-white/35">⚠️ Aviso de Proyecto / Legal Disclaimer:</span> Este sitio web es únicamente una referencia de proyecto, plantilla y muestra de portafolio de diseño y desarrollo web. <strong>NO es una página oficial</strong> de la empresa <em>Poppy Paws Mobile Dog Grooming</em> ni tiene relación comercial, jurídica, societaria o contractual con <strong>Poppy Paws LLC (poppypawsgrooming)</strong>. Todas las marcas, logotipos y nombres comerciales se muestran únicamente con fines estéticos y de demostración técnica. Los botones de reserva, formulario y WhatsApp funcionan como muestras interactivas.
+          </p>
+        </div>
+
         {/* BOTTOM BAR */}
-        <div className="border-t border-white/10 pt-6 mt-10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/5 pt-6 mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/30 text-center md:text-left font-dm-sans">
-            © 2026 Poppy Paws LLC. All rights reserved.
+            © 2026 Poppy Paws LLC (Template Demo). All rights reserved.
           </p>
           <p className="text-xs text-white/30 text-center md:text-left font-dm-sans">
             © build by <a href="https://addstrategic.com" target="_blank" rel="noopener noreferrer">ADDSTRATEGIC LLC</a>.

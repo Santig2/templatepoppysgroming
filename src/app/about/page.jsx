@@ -4,7 +4,7 @@ import { FadeIn } from '@/components/FadeIn';
 
 export const metadata = {
   title: 'About Us | Poppy Paws Mobile Grooming Austin',
-  description: 'Learn about William and Cris, the founders of Poppy Paws Mobile Dog Grooming. 20+ years of experience bringing stress-free pet care to Central Texas.',
+  description: 'Learn about Julian and Elena, the founders of Poppy Paws Mobile Dog Grooming. 18+ years of experience bringing stress-free pet care to Central Texas.',
 };
 
 export default function AboutPage() {
@@ -29,21 +29,21 @@ export default function AboutPage() {
             <FadeIn className="relative h-[500px] w-full max-w-md mx-auto md:mx-0">
               <div className="absolute top-0 left-0 w-[80%] h-[80%] rounded-3xl overflow-hidden shadow-[var(--clay-image)] z-10 border-4 border-white">
                 <img
-                  src="/william%20ceo.png"
-                  alt="William grooming a dog"
+                  src="/julian-founder.jpg"
+                  alt="Julian master groomer"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute bottom-0 right-0 w-[60%] h-[60%] rounded-3xl overflow-hidden shadow-[var(--clay-image)] z-20 border-4 border-white">
                 <img
-                  src="/valentina%20ceo.png"
-                  alt="Cris posing with a dog"
+                  src="/elena-founder.jpg"
+                  alt="Elena co-founder"
                   className="w-full h-full object-cover"
                 />
               </div>
               {/* Decorative Stamp */}
               <div className="absolute top-10 -right-6 w-24 h-24 bg-pp-gold text-white rounded-full flex flex-col items-center justify-center font-bold font-dm-sans rotate-[15deg] shadow-lg z-30">
-                <span className="text-xl leading-none">20+</span>
+                <span className="text-xl leading-none">18+</span>
                 <span className="text-[10px] uppercase tracking-wider">Years</span>
               </div>
             </FadeIn>
@@ -52,17 +52,17 @@ export default function AboutPage() {
             <FadeIn delay={200}>
               <p className="text-xs font-bold uppercase tracking-widest text-pp-red mb-3 font-dm-sans">OUR STORY</p>
               <h2 className="text-3xl md:text-[40px] font-playfair font-bold text-pp-dark leading-[1.2] mb-6">
-                Meet William and valentina
+                Meet Julian and Elena
               </h2>
               <div className="space-y-4 text-base text-pp-body leading-[1.8] font-dm-sans">
                 <p>
-                  Poppy Paws wasn't started in a boardroom. It was born from a simple realization after two decades in the pet care industry: <strong>dogs hate salons.</strong>
+                  Poppy Paws wasn't started in a boardroom. It was born from a simple realization after almost two decades in the pet care industry: <strong>dogs hate salons.</strong>
                 </p>
                 <p>
-                  For years, William worked as a master groomer, honing his skills on every breed and coat type imaginable. While he loved the grooming process, he saw the stress that traditional salons put on dogs—cages, loud dryers, barking, and long wait times.
+                  For years, Julian worked as a master groomer, honing his skills on every breed and coat type imaginable. While he loved the grooming process, he saw the stress that traditional salons put on dogs—cages, loud dryers, barking, and long wait times.
                 </p>
                 <p>
-                  Together with Valentina, they decided there had to be a better way. They envisioned a service that was as convenient for the owners as it was calming for the dogs. A service where the groomer comes to you, and your dog receives uninterrupted, one-on-one attention from start to finish.
+                  Together with Elena, they decided there had to be a better way. They envisioned a service that was as convenient for the owners as it was calming for the dogs. A service where the groomer comes to you, and your dog receives uninterrupted, one-on-one attention from start to finish.
                 </p>
                 <p>
                   Today, Poppy Paws serves hundreds of happy families across Austin and Georgetown. We bring our fully-equipped, climate-controlled van right to your driveway. No cages, no stress, just a premium spa day for your best friend.

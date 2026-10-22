@@ -75,6 +75,9 @@ export default function BookPage() {
             <p className="md:text-white/80 text-pp-muted font-dm-sans text-base mt-3 drop-shadow-sm">
               Fill out this quick form and we'll be in touch within 24 hours to secure your spot.
             </p>
+            <p className="text-[11px] text-pp-muted/50 md:text-white/40 font-dm-sans mt-2 tracking-wide italic select-none">
+              * Nota de proyecto: Formulario interactivo con fines demostrativos de portafolio web. No procesa reservas oficiales de la empresa.
+            </p>
           </FadeIn>
 
            {/* Client Component */}
